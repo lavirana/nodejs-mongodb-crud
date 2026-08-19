@@ -6,13 +6,15 @@ const users = require("./MOCK_DATA.json");
 const { type } = require("os");
 const console = require("console");
 const userRouter = require('./routes/user');
+const {connectMongoDb} = require("./connection");
 
 const PORT = 8000;
+connectMongoDb("mongodb://127.0.0.1:27017/nodejs-practice-pro");
 
 // connection
-mongoose.connect("mongodb://127.0.0.1:27017/nodejs-practice-pro")
-.then(() => console.log("Mongodb connected"))
-.catch((err) => console.log("Mongo Error"))
+//mongoose.connect("mongodb://127.0.0.1:27017/nodejs-practice-pro")
+//.then(() => console.log("Mongodb connected"))
+//.catch((err) => console.log("Mongo Error"))
 
 
 // schema
