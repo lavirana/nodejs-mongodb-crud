@@ -1,6 +1,8 @@
 const express = require("express");
 
 const router = express.Router();
+const { handleGetAllUsers, handlegetUserById, handleUpdateUserById } = require("../controllers/user");
+
 
 
 // Routes
@@ -60,11 +62,7 @@ router.get('/:id', (req, res) => {
     return res.json(user);
 });
 
-router.patch('/:id', async(req, res) => {
-    //Edit the user with ID
-    await User.findByIdAndUpdate(req.params.id, {last_name: "Changed"})
-    return res.json({status: "pending"});
-})
+router.patch('/:id', handleUpdateUserById)
 
 router.delete('/:id', (req, res) => {
     //Delete the user with ID

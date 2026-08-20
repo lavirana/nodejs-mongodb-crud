@@ -3,10 +3,11 @@ const app = express();
 const fs = require("fs");
 const mongoose = require("mongoose");
 const users = require("./MOCK_DATA.json");
-const { type } = require("os");
+const { type, loadavg } = require("os");
 const console = require("console");
 const userRouter = require('./routes/user');
 const {connectMongoDb} = require("./connection");
+const { logReqRes } = require("./routes/user");
 
 const PORT = 8000;
 connectMongoDb("mongodb://127.0.0.1:27017/nodejs-practice-pro");
@@ -42,7 +43,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("user", userSchema);
 
 //Middleware
-app.use(express.urlencoded({extended: false}));
+app.use(logReqRes("log.txt"));
 
 
 
