@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const { handleGetAllUsers, handlegetUserById, handleUpdateUserById } = require("../controllers/user");
+const { handleGetAllUsers, handlegetUserById, handleUpdateUserById, handleCreateNewUser } = require("../controllers/user");
 
 
 
@@ -34,26 +34,7 @@ router.route('/:id')
     return res.json({status : "Pending"});
 })
 
-router.post('/', async (req, res) => {
-    //Create new user
-    const body = req.body;
-    /*
-    users.push({...body, id: users.length + 1});
-    fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
-        return res.status(201).json({status: "success", id: users. length});
-    });
-    */
-
-    const result = await User.create ({
-        firstName: body.first_name,
-        lastName: body.last_name,
-        email: body.email,
-        gender: body.gender,
-        jobTitle: body.job_title,
-    });
-
-    return res.status(201).json({msg: 'success'});
-})
+router.post('/', handleCreateNewUser);
 
 
 router.get('/:id', (req, res) => {

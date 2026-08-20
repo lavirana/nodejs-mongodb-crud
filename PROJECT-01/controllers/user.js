@@ -21,7 +21,28 @@ async function handleDeleteUserById(req, res) {
     return res.json({status: "Sucess"});
 }
 
+async function handleCreateNewUser(req, res) {
+    //Create new user
+    const body = req.body;
+    /*
+    users.push({...body, id: users.length + 1});
+    fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
+        return res.status(201).json({status: "success", id: users. length});
+    });
+    */
+
+    const result = await User.create ({
+        firstName: body.first_name,
+        lastName: body.last_name,
+        email: body.email,
+        gender: body.gender,
+        jobTitle: body.job_title,
+    });
+
+    return res.status(201).json({msg: 'success', id: result._id});
+}
+
 
 module.exports = {
-    handleGetAllUsers, handlegetUserById, handleUpdateUserById, handleDeleteUserById
+    handleGetAllUsers, handlegetUserById, handleUpdateUserById, handleDeleteUserById, handleCreateNewUser
 }
